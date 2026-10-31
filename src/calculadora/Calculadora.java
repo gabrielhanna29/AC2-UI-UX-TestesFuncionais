@@ -1,7 +1,7 @@
 package calculadora;
 
 /**
- * Versão inicial da calculadora do FinançApp.
+ * Classe responsável por realizar operações matemáticas básicas.
  *
  * @author FinançApp
  * @version 1.0
@@ -12,58 +12,92 @@ public class Calculadora {
      * Cria uma calculadora.
      */
     public Calculadora() {
-        // Não há inicializações adicionais nesta versão.
+        // Não há estado interno para inicializar.
     }
 
+    /** Precisão utilizada na comparação de resultados decimais nos testes. */
+    public static final double TOLERANCIA = 0.000001;
+
     /**
-     * Executa uma operação matemática básica.
+     * Executa uma operação matemática entre dois números inteiros.
+     * A divisão pode produzir um resultado decimal.
      *
-     * @param a primeiro número
-     * @param b segundo número
-     * @param op operador (+, -, * ou /)
-     * @return resultado da operação
-     * @throws IllegalArgumentException se o operador for inválido
-     * @throws ArithmeticException se houver divisão por zero
+     * @param a primeiro número da operação
+     * @param b segundo número da operação
+     * @param op operador: "+", "-", "*" ou "/"
+     * @return resultado da operação como número decimal
+     * @throws IllegalArgumentException quando o operador for nulo ou inválido
+     * @throws ArithmeticException quando houver tentativa de divisão por zero
      */
     public double calc(int a, int b, String op) {
-        if (op == null) {
-            throw new IllegalArgumentException("O operador não pode ser nulo.");
-        }
+        String operador = normalizarOperador(op);
 
-        switch (op.trim()) {
-            case "+":
-                return a + b;
-            case "-":
-                return a - b;
-            case "*":
-                return (double) a * b;
-            case "/":
-                if (b == 0) {
-                    throw new ArithmeticException("Não é possível dividir por zero.");
-                }
-                return (double) a / b;
-            default:
-                throw new IllegalArgumentException("Operação inválida. Utilize +, -, * ou /.");
-        }
+        return switch (operador) {
+            case "+" -> a + b;
+            case "-" -> a - b;
+            case "*" -> (double) a * b;
+            case "/" -> dividir(a, b);
+            default -> throw new IllegalArgumentException(
+                    "Operação inválida: '" + operador + "'. Utilize +, -, * ou /."
+            );
+        };
     }
 
     /**
-     * Demonstra as operações e o tratamento de erros.
+     * Normaliza o operador removendo espaços desnecessários.
      *
-     * @param args argumentos da linha de comando
+     * @param operador operador informado pelo usuário
+     * @return operador sem espaços nas extremidades
+     * @throws IllegalArgumentException se o operador for nulo ou vazio
+     */
+    private String normalizarOperador(String operador) {
+        if (operador == null || operador.isBlank()) {
+            throw new IllegalArgumentException("O operador não pode ser nulo ou vazio.");
+        }
+        return operador.trim();
+    }
+
+    /**
+     * Realiza a divisão após verificar se o divisor é diferente de zero.
+     *
+     * @param dividendo número que será dividido
+     * @param divisor número pelo qual será feita a divisão
+     * @return resultado da divisão
+     * @throws ArithmeticException se o divisor for zero
+     */
+    private double dividir(int dividendo, int divisor) {
+        if (divisor == 0) {
+            throw new ArithmeticException("Não é possível dividir por zero.");
+        }
+        return (double) dividendo / divisor;
+    }
+
+    /**
+     * Executa exemplos de operações e demonstra o tratamento de erros.
+     * As exceções são tratadas para que uma operação inválida não encerre
+     * inesperadamente a execução do programa.
+     *
+     * @param args argumentos recebidos pela linha de comando
      */
     public static void main(String[] args) {
         Calculadora calculadora = new Calculadora();
-        String[][] exemplos = {{"10", "5", "+"}, {"10", "5", "-"},
-                {"10", "5", "*"}, {"10", "4", "/"}, {"10", "0", "/"},
-                {"10", "5", "%"}};
+        String[][] exemplos = {
+                {"10", "5", "+"},
+                {"10", "5", "-"},
+                {"10", "5", "*"},
+                {"10", "4", "/"},
+                {"10", "0", "/"},
+                {"10", "5", "%"}
+        };
 
         for (String[] exemplo : exemplos) {
             int a = Integer.parseInt(exemplo[0]);
             int b = Integer.parseInt(exemplo[1]);
+            String operador = exemplo[2];
+
             try {
-                System.out.println(a + " " + exemplo[2] + " " + b + " = "
-                        + calculadora.calc(a, b, exemplo[2]));
+                double resultado = calculadora.calc(a, b, operador);
+                System.out.printf("%d %s %d = %s%n", a, operador, b, resultado);
             } catch (IllegalArgumentException | ArithmeticException erro) {
                 System.out.println("Erro: " + erro.getMessage());
             }

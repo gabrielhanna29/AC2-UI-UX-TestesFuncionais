@@ -13,6 +13,11 @@ public class TesteCalculadora {
     private int testesExecutados;
     private int testesAprovados;
 
+    /** Cria a suíte de testes e sua calculadora. */
+    public TesteCalculadora() {
+        // Os campos são inicializados junto com a instância.
+    }
+
     /** Executa todos os cenários de teste da calculadora. */
     public void executarTestes() {
         testarSoma();
@@ -121,7 +126,11 @@ public class TesteCalculadora {
                 aprovado ? "APROVADO" : "FALHOU", nome, detalhes);
     }
 
-    /** Executa a suíte de testes. */
+    /**
+     * Executa a suíte de testes.
+     *
+     * @param args argumentos da linha de comando (não utilizados)
+     */
     public static void main(String[] args) {
         new TesteCalculadora().executarTestes();
     }
