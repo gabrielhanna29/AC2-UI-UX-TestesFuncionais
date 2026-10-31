@@ -72,7 +72,7 @@ Os testes exibem a entrada, o resultado esperado e o resultado obtido. A suíte 
 
 > **Substitua este espaço por uma captura de tela real** do terminal mostrando a execução de `TesteCalculadora` e os seis testes aprovados.
 
-![Execução dos testes](imagens/testes.png)
+**Imagem a inserir:** captura de tela do terminal com os seis testes aprovados.
 
 ## 8. Refatoração
 
@@ -96,7 +96,7 @@ Abra `docs/index.html` no navegador para consultar a documentação.
 
 > **Substitua este espaço por uma captura de tela real** da documentação JavaDoc aberta no navegador.
 
-![Documentação JavaDoc](imagens/javadoc.png)
+**Imagem a inserir:** captura de tela do arquivo `docs/index.html` aberto no navegador.
 
 ## 10. Repositório remoto
 
