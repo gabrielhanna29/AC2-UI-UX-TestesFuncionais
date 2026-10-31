@@ -96,14 +96,14 @@ Abra `docs/index.html` no navegador para consultar a documentação.
 
 > **Substitua este espaço por uma captura de tela real** da documentação JavaDoc aberta no navegador.
 
-![Documentação JavaDoc](imagens/javadoc.png)
+![Documentação JavaDoc](prints/javadoc.png)
 
 ## 10. Repositório remoto
 
-**Link do GitHub:** [INSIRA AQUI A URL DO SEU REPOSITÓRIO]
+**Link do GitHub:** [(https://github.com/gabrielhanna29/AC2-UI-UX-TestesFuncionais.git)]
 
 O repositório deve conter a branch principal (`main`) e a branch `Refatoracao`, além dos commits que registram as etapas de desenvolvimento.
 
 ## 11. Autor
 
-Nome: [SEU NOME]
+Nome: [Gabriel de Oliveira Hanna]
